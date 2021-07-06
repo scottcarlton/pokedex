@@ -16,13 +16,13 @@ const StyledLink = styled(Link)`
 
 function Pokedom() {
 
-  const { pokemonData, setFilteredPokemonData } = useContext(PokedexContext);
+  const { pokemonData, setFilteredPokemonData, clearFilters } = useContext(PokedexContext);
   const [pokemon, setPokemon] = useState();
   const { id } = useParams();
 
   useEffect(() => {
     setPokemon(pokemonData.filter(data => data.num === id)[0]);
-    setFilteredPokemonData(pokemonData);
+    clearFilters();
   }, [setPokemon, pokemonData, setFilteredPokemonData, id]);
 
   return (
