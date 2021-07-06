@@ -41,14 +41,14 @@ const Details = (props) => {
         { data.prev_evolution && ( <li>
           <h3>Previous Evolution</h3>
           <ul>
-            { data.prev_evolution.map(prev => (<li>{prev.num} : {prev.name}</li>)) }
+            { data.prev_evolution.map(prev => (<li key={prev.num} >{prev.num} : {prev.name}</li>)) }
           </ul>
 
         </li> )}
         { data.next_evolution && ( <li>
           <h3>Next Evolution</h3>
           <ul>
-            { data.next_evolution.map(next => (<li>{next.num} : {next.name}</li>)) }
+            { data.next_evolution.map(next => (<li key={next.num }>{next.num} : {next.name}</li>)) }
           </ul>
 
         </li> )}
