@@ -1,7 +1,9 @@
-import React, { useState, useContext } from 'react';
+import { useContext } from 'react';
 import { PokedexContext } from '../context/PokedexProvider';
 
-import Checkbox from './Checkbox';
+
+import FiltersTypes from './FiltersTypes';
+import FiltersWeaknesses from './FiltersWeaknesses';
 
 import styled from 'styled-components';
 
@@ -17,41 +19,11 @@ const StyledFiltersHeader = styled.div`
 `
 const Filters = () => {
 
-  const [types, setTypes] = useState([]);
-
-  const [weaknesses, setWeaknesses] = useState([]);
-
   const {
-    pokemonData,
-    filterByType,
-    filterByWeaknesses,
     clearFilters
   } = useContext(PokedexContext);
 
-  const buildTypes = () => {
-    pokemonData.forEach(pokemon => {
-      pokemon.type.forEach(type => {
-        if (!types.includes(type)) {
-          setTypes([type, ...types])
-        }
-      });
-    })
-    types.sort();
-  }
 
-  const buildWeaknesses = () => {
-    pokemonData.forEach(pokemon => {
-      pokemon.weaknesses.forEach(weakness => {
-        if (!weaknesses.includes(weakness)) {
-          setWeaknesses([weakness, ...weaknesses])
-        }
-      });
-    })
-    weaknesses.sort();
-  }
-
-  buildTypes();
-  buildWeaknesses();
 
   return (
     <StyledFilters>
@@ -59,14 +31,8 @@ const Filters = () => {
         <h2>Filters</h2>
         <button type="button" onClick={clearFilters}>Clear</button>
       </StyledFiltersHeader>
-      <h3>Types</h3>
-      { types && types.map(type => (
-        <Checkbox input={type} key={type} onChange={filterByType} />
-      ))}
-      <h3>Weakness</h3>
-      { weaknesses && weaknesses.map(weakness => (
-        <Checkbox input={weakness} key={weakness} onChange={filterByWeaknesses} />
-      ))}
+      <FiltersTypes />
+      <FiltersWeaknesses />
     </StyledFilters>
   );
 }
